@@ -20,33 +20,23 @@ function Auth({ register }) {
 
   const handleRegister = async () => {
     const { username, email, password } = user
-
-    if (!username || !email || !password) {
-      return toast.info("Enter Valid Data")
-    }
+    if (!username || !email || !password) return toast.info("Enter Valid Data")
 
     const res = await signupApi(user)
-
     if (res.status === 200) {
       toast.success("Signup Successful")
       setUser({ username: "", email: "", password: "" })
       navigate('/login')
-    } else {
-      toast.error("Signup Failed")
-    }
+    } else toast.error("Signup Failed")
   }
 
   const handleLogin = async () => {
     const { email, password } = user
-
-    if (!email || !password) {
-      return toast.info("Enter Valid Data")
-    }
+    if (!email || !password) return toast.info("Enter Valid Data")
 
     const res = await signinApi({ email, password })
 
     if (res.status === 200) {
-
       sessionStorage.setItem('token', res.data.token)
       sessionStorage.setItem('uname', res.data.username)
       sessionStorage.setItem('dp', res.data.profile)
@@ -57,25 +47,15 @@ function Auth({ register }) {
 
       toast.success("Login Successful")
 
-      setUser({
-        username: "",
-        email: "",
-        password: ""
-      })
+      setUser({ username: "", email: "", password: "" })
 
-      navigate(
-        res.data.role === "admin"
-          ? "/admin-dashboard"
-          : "/"
-      )
-
+      navigate(res.data.role === "admin" ? '/admin-dashboard' : '/')
     } else {
       toast.error("Login Failed")
     }
   }
 
   const handleGoogleLogin = async (cred) => {
-
     const decoded = jwtDecode(cred?.credential)
 
     const data = {
@@ -87,7 +67,6 @@ function Auth({ register }) {
     const res = await googleSigninApi(data)
 
     if (res.status === 200) {
-
       sessionStorage.setItem('token', res.data.token)
       sessionStorage.setItem('uname', res.data.username)
       sessionStorage.setItem('dp', res.data.profile)
@@ -98,74 +77,93 @@ function Auth({ register }) {
 
       toast.success("Login Successful")
       navigate('/')
-
-    } else {
-      toast.error("Google Login Failed")
-    }
+    } else toast.error("Google Login Failed")
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-950 via-emerald-900 to-black px-4 py-10">
+  <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 flex items-center justify-center px-4 py-10">
 
-      <div className="w-full max-w-md bg-white/10 backdrop-blur-xl border border-green-400/20 shadow-2xl rounded-3xl p-8 text-white">
+    <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden">
 
-        {/* Logo Section */}
-        <div className="flex flex-col items-center mb-8">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-8 text-center">
 
-          <div className="bg-green-500/20 p-4 rounded-full mb-4">
-            <FaRegUserCircle className="text-6xl text-emerald-300" />
+        <div className="flex justify-center mb-4">
+          <div className="bg-white p-3 rounded-full shadow-lg">
+            <FaRegUserCircle className="text-5xl text-green-600" />
           </div>
-
-          <h1 className="text-3xl font-bold">
-            {register ? "Create Account" : "Welcome Back"}
-          </h1>
-
-          <p className="text-sm text-gray-300 mt-2">
-            {register
-              ? "Register to access Book Store"
-              : "Login to continue"}
-          </p>
-
         </div>
 
-        {/* Form */}
+        <h1 className="text-3xl font-bold text-white">
+          {register ? "Create Account" : "Welcome Back"}
+        </h1>
+
+        <p className="text-green-100 mt-2">
+          {register
+            ? "Create your bookstore account"
+            : "Login to continue reading"}
+        </p>
+
+      </div>
+
+      {/* Form */}
+      <div className="p-8">
+
         <div className="space-y-4">
 
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={user.email}
-            onChange={(e) =>
-              setUser({ ...user, email: e.target.value })
-            }
-            className="w-full p-3 rounded-xl bg-white/10 border border-green-300/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-          />
-
           {register && (
-            <input
-              type="text"
-              placeholder="Username"
-              value={user.username}
-              onChange={(e) =>
-                setUser({ ...user, username: e.target.value })
-              }
-              className="w-full p-3 rounded-xl bg-white/10 border border-green-300/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-            />
+            <div>
+              <label className="block text-gray-700 mb-2 font-medium">
+                Username
+              </label>
+
+              <input
+                type="text"
+                placeholder="Enter username"
+                value={user.username}
+                onChange={(e) =>
+                  setUser({ ...user, username: e.target.value })
+                }
+                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </div>
           )}
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={user.password}
-            onChange={(e) =>
-              setUser({ ...user, password: e.target.value })
-            }
-            className="w-full p-3 rounded-xl bg-white/10 border border-green-300/20 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-          />
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={user.email}
+              onChange={(e) =>
+                setUser({ ...user, email: e.target.value })
+              }
+              className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-2 font-medium">
+              Password
+            </label>
+
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={user.password}
+              onChange={(e) =>
+                setUser({ ...user, password: e.target.value })
+              }
+              className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+          </div>
 
           {!register && (
-            <div className="flex justify-end">
-              <span className="text-xs text-emerald-300 cursor-pointer hover:underline">
+            <div className="text-end">
+              <span className="text-green-600 text-sm cursor-pointer hover:underline">
                 Forgot Password?
               </span>
             </div>
@@ -173,55 +171,53 @@ function Auth({ register }) {
 
           <button
             onClick={register ? handleRegister : handleLogin}
-            className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.02] transition-all duration-300 shadow-lg cursor-pointer"
+            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.01] transition-all"
           >
             {register ? "Create Account" : "Login"}
           </button>
 
           {!register && (
             <>
-              <div className="flex items-center gap-3 text-sm text-gray-300">
-                <div className="flex-1 border-t border-green-400/20"></div>
-                OR
-                <div className="flex-1 border-t border-green-400/20"></div>
+              <div className="flex items-center my-5">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <span className="px-3 text-gray-500 text-sm">
+                  OR CONTINUE WITH
+                </span>
+                <div className="flex-1 border-t border-gray-300"></div>
               </div>
 
               <div className="flex justify-center">
                 <GoogleLogin
                   onSuccess={handleGoogleLogin}
-                  onError={() =>
-                    toast.error("Google Login Failed")
-                  }
+                  onError={() => toast.error("Google Login Failed")}
                 />
               </div>
             </>
           )}
-
         </div>
 
-        {/* Bottom Links */}
-        <div className="text-center mt-8 text-sm text-gray-300">
+        <div className="text-center mt-8">
 
           {register ? (
-            <>
+            <p className="text-gray-600">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-emerald-300 font-semibold hover:underline cursor-pointer"
+                className="text-green-600 font-semibold hover:underline"
               >
                 Login
               </Link>
-            </>
+            </p>
           ) : (
-            <>
+            <p className="text-gray-600">
               New User?{" "}
               <Link
                 to="/register"
-                className="text-emerald-300 font-semibold hover:underline cursor-pointer"
+                className="text-green-600 font-semibold hover:underline"
               >
                 Register
               </Link>
-            </>
+            </p>
           )}
 
         </div>
@@ -229,7 +225,9 @@ function Auth({ register }) {
       </div>
 
     </div>
-  )
+
+  </div>
+)
 }
 
 export default Auth
