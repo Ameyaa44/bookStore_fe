@@ -81,12 +81,12 @@ function Auth({ register }) {
   }
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 flex items-center justify-center px-4 py-10">
+  <div className="min-h-screen bg-[#F8F5F0] flex items-center justify-center px-4 py-10">
 
     <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden">
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-8 text-center">
+      <div className="bg-gradient-to-r from-green-700 to-emerald-600 p-8 text-center">
 
         <div className="flex justify-center mb-4">
           <div className="bg-white p-3 rounded-full shadow-lg">
@@ -171,7 +171,7 @@ function Auth({ register }) {
 
           <button
             onClick={register ? handleRegister : handleLogin}
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.01] transition-all"
+            className="w-full bg-gradient-to-r from-green-700 to-emerald-700 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.01] transition-all"
           >
             {register ? "Create Account" : "Login"}
           </button>
