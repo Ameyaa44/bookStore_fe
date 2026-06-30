@@ -147,9 +147,11 @@ function Home() {
                         ₹{book.price}
                       </span>
 
+                    <Link to='/books'>
                       <button className="bg-[#1B4332] text-white px-4 py-2 rounded-lg hover:bg-[#143126] transition">
                         View
                       </button>
+                    </Link>
                     </div>
                   </div>
                 </div>
