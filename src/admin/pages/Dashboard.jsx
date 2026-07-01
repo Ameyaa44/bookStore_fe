@@ -81,8 +81,8 @@ function DashBoard() {
   };
 
   const stats = [
-    { icon: <FaBook className='text-2xl' />,       label: 'Total Books',     value: '500+', color: 'from-[#0D2818] to-[#1A5C38]' },
-    { icon: <FaUsers className='text-2xl' />,      label: 'Total Users',     value: '300+', color: 'from-[#6B4226] to-[#C5A880]' },
+    { icon: <FaBook className='text-2xl' />,       label: 'Total Books',     value: '100+', color: 'from-[#0D2818] to-[#1A5C38]' },
+    { icon: <FaUsers className='text-2xl' />,      label: 'Total Users',     value: '100+', color: 'from-[#6B4226] to-[#C5A880]' },
     { icon: <GrUserWorker className='text-2xl' />, label: 'Total Employees', value: '25+',  color: 'from-[#2C3E50] to-[#4A6A80]' },
   ]
 
