@@ -193,19 +193,19 @@ function Header() {
             <li>
               <Link
                 className="relative text-sm uppercase tracking-[2px] hover:text-[#C5A880] font-medium transition duration-300 py-1 block"
-                to="/career"
+                to="/contact"
                 onClick={() => setMenuState(false)}
               >
-                Careers
+                Contact
               </Link>
             </li>
             <li>
               <Link
                 className="relative text-sm uppercase tracking-[2px] hover:text-[#C5A880] font-medium transition duration-300 py-1 block"
-                to="/contact"
+                to=""
                 onClick={() => setMenuState(false)}
               >
-                Contact
+                About
               </Link>
             </li>
           </ul>
