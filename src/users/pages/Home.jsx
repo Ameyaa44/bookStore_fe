@@ -73,19 +73,19 @@ function Home() {
               Explore our exquisite treasury of rare editions, award-winning masterpieces, and biographies crafted for the discerning mind.
             </p>
 
-            <div className="mt-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full p-2.5 flex items-center max-w-2xl mx-auto shadow-[0_20px_50px_rgba(0,0,0,0.3)] focus-within:border-[#C5A880]/60 transition-all duration-300">
+            <div className="mt-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full p-1.5 flex items-center max-w-2xl mx-auto shadow-[0_20px_50px_rgba(0,0,0,0.3)] focus-within:border-[#C5A880]/60 transition-all duration-300">
               <input
                 type="text"
                 placeholder="Search premium volumes, authors, genres..."
-                className="flex-grow px-6 py-3 text-white placeholder-[#EAE0D5]/50 outline-none bg-transparent text-sm font-light"
+                className="flex-grow px-6 py-3.5 text-white placeholder-[#EAE0D5]/50 outline-none bg-transparent text-sm font-light"
                 onChange={(e) => setGlobalSearchKey(e.target.value)}
               />
 
               <button
                 onClick={gotoBooks}
-                className="bg-[#C5A880] hover:bg-[#FAF7F2] text-[#0D2818] hover:shadow-[0_0_15px_rgba(197,168,128,0.4)] transition-all duration-300 p-4.5 rounded-full"
+                className="bg-[#C5A880] hover:bg-[#FAF7F2] text-[#0D2818] hover:shadow-[0_0_15px_rgba(197,168,128,0.4)] transition-all duration-300 p-3.5 rounded-full"
               >
-                <FaMagnifyingGlass size={16} />
+                <FaMagnifyingGlass size={15} />
               </button>
             </div>
           </div>
