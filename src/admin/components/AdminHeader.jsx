@@ -39,7 +39,7 @@ function AdminHeader() {
 
       <div className='bg-[#C5A880]/10 border-b border-[#C5A880]/20 py-2 px-6 overflow-hidden'>
         <p className="text-[#C5A880] text-xs uppercase tracking-[2px] font-light whitespace-nowrap animate-marquee inline-block">
-          ✦ &nbsp; Welcome, Admin — Monitor book listings, manage careers, and update system settings from this panel &nbsp; ✦ &nbsp; All data is updated in real-time &nbsp; ✦
+          ✦ &nbsp; Welcome, Admin — Monitor book listings and update system settings from this panel &nbsp; ✦ &nbsp; All data is updated in real-time &nbsp; ✦
         </p>
       </div>
     </>

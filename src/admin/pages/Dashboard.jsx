@@ -3,9 +3,7 @@ import Footer from '../../components/Footer'
 import AdminSidebar from '../components/AdminSidebar'
 import AdminHeader from '../components/AdminHeader';
 
-import { FaBook } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { GrUserWorker } from "react-icons/gr";
+import { FaBook, FaUsers, FaShoppingBag } from "react-icons/fa";
 
 import HighchartsReact from 'highcharts-react-official';
 import HighCharts from 'highcharts';
@@ -81,9 +79,9 @@ function DashBoard() {
   };
 
   const stats = [
-    { icon: <FaBook className='text-2xl' />,       label: 'Total Books',     value: '100+', color: 'from-[#0D2818] to-[#1A5C38]' },
+    { icon: <FaBook className='text-2xl' />,       label: 'Total Books',     value: '200', color: 'from-[#0D2818] to-[#1A5C38]' },
     { icon: <FaUsers className='text-2xl' />,      label: 'Total Users',     value: '100+', color: 'from-[#6B4226] to-[#C5A880]' },
-    { icon: <GrUserWorker className='text-2xl' />, label: 'Total Employees', value: '25+',  color: 'from-[#2C3E50] to-[#4A6A80]' },
+    { icon: <FaShoppingBag className='text-2xl' />, label: 'Books Sold',     value: '150+', color: 'from-[#2C3E50] to-[#4A6A80]' },
   ]
 
   return (
