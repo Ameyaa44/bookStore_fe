@@ -30,7 +30,7 @@ function AdminSidebar() {
     const navLinks = [
         { path: '/admin-dashboard', icon: <IoMdHome size={16} />, label: 'Dashboard' },
         { path: '/admin-books',     icon: <FaBook size={14} />,    label: 'Resources' },
-        { path: '/admin-career',    icon: <IoBagAdd size={16} />,  label: 'Careers' },
+        // { path: '/admin-career',    icon: <IoBagAdd size={16} />,  label: 'Careers' },
         { path: '/admin-settings',  icon: <IoSettingsSharp size={15} />, label: 'Settings' },
     ]
 

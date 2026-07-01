@@ -254,26 +254,7 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-[#0A1C12] py-24 text-center px-6 border-t border-[#C5A880]/20 relative overflow-hidden select-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0D2818]/50 via-transparent to-transparent opacity-40"></div>
-        
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-serif-display font-bold text-white leading-tight">
-            "A book is a dream you hold in your hand."
-          </h2>
-
-          <p className="mt-6 text-sm text-[#EAE0D5]/70 max-w-lg mx-auto font-light leading-7">
-            Start exploring thousands of stories, ideas, and intellectual adventures from premium authors around the world.
-          </p>
-
-          <Link to="/books" className="inline-block mt-10">
-            <button className="px-10 py-4 rounded-full bg-[#C5A880] text-[#0D2818] hover:bg-[#FAF7F2] transition-all duration-300 font-semibold text-xs uppercase tracking-[2px] shadow-xl">
-              Browse Books
-            </button>
-          </Link>
-        </div>
-      </section>
+      
 
       <Footer />
     </>
