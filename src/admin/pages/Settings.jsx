@@ -75,7 +75,6 @@ function Settings() {
       formData.append("email", email)
       formData.append("password", password)
 
-      // only append if file selected
       if (profilePic instanceof File) {
         formData.append("profile", profilePic)
       }
@@ -102,112 +101,142 @@ function Settings() {
     }
   }
 
+  const inputClass = "w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"
+
   return (
     <>
       <AdminHeader />
 
-      <div className='min-h-[60vh] md:grid grid-cols-4'>
+      <div className='min-h-[80vh] md:grid grid-cols-4 bg-[#FAF7F2]'>
         <div className='col-span-1'>
           <AdminSidebar />
         </div>
 
-        <div className='col-span-3'>
-          <h1 className='text-3xl text-center my-5'>Admin Settings</h1>
+        <div className='col-span-3 px-6 py-8'>
 
-          <div className='md:grid grid-cols-2'>
-            <div className='p-2'>
-              <p className='text-justify'>
-                Manage admin profile, credentials and system settings securely.
+          <div className="mb-8">
+            <h1 className="font-serif-display text-2xl font-bold text-[#0D2818]">Admin Settings</h1>
+            <p className="text-xs text-[#0D2818]/50 mt-1 uppercase tracking-[1.5px]">Manage your credentials and profile</p>
+          </div>
+
+          <div className='md:grid grid-cols-2 gap-10 items-start'>
+
+            {/* Left info panel */}
+            <div className='hidden md:block bg-white border border-[#E3DAC9]/60 rounded-3xl p-8 shadow-sm'>
+              <h2 className="font-serif-display text-lg font-semibold text-[#0D2818] mb-3">Profile Security</h2>
+              <div className="w-8 h-[1px] bg-[#C5A880] mb-5"></div>
+              <p className='text-sm text-[#0D2818]/65 font-light leading-7'>
+                Manage your admin profile credentials securely. Keep your password strong and your profile picture up to date for secure access.
               </p>
+              <div className="mt-8 space-y-3">
+                {['Strong unique password', 'Professional profile photo', 'Up-to-date email address'].map(tip => (
+                  <div key={tip} className="flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C5A880]"></span>
+                    <span className="text-xs text-[#0D2818]/60 font-light">{tip}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className='p-2'>
-              <div className='w-full bg-sky-300 py-4 px-5'>
+            {/* Right form panel */}
+            <div className='bg-white border border-[#E3DAC9]/60 rounded-3xl shadow-sm overflow-hidden'>
+
+              {/* Header */}
+              <div className="bg-[#0D2818] px-6 py-5 border-b border-[#C5A880]/20">
+                <h2 className="font-serif-display text-base font-semibold text-[#C5A880]">Update Profile</h2>
+              </div>
+
+              <div className='p-6 space-y-5'>
 
                 {/* IMAGE */}
-                <label htmlFor="profile_pic" className="flex justify-center cursor-pointer">
-                  <input
-                    type="file"
-                    id="profile_pic"
-                    hidden
-                    onChange={handleImageUpload}
-                  />
-
-                  <div className="relative">
-                    <img
-                      src={
-                        preview
-                          ? preview
-                          : profileData.profilePic
-                            ? profileData.profilePic.startsWith("http")
-                              ? profileData.profilePic
-                              : `${base_url}/uploadImg/${profileData.profilePic}`
-                            : "https://static.vecteezy.com/system/resources/thumbnails/037/468/797/small/user-icon-illustration-for-graphic-design-logo-web-site-social-media-mobile-app-ui-png.png"
-                      }
-                      alt="profile"
-                      className="w-[110px] h-[110px] rounded-full object-cover"
+                <div className="flex justify-center py-2">
+                  <label htmlFor="profile_pic" className="relative cursor-pointer group flex justify-center items-center w-[120px] h-[120px] rounded-full border-2 border-[#C5A880]/40 p-0.5 hover:border-[#C5A880] transition-colors duration-300">
+                    <input
+                      type="file"
+                      id="profile_pic"
+                      hidden
+                      onChange={handleImageUpload}
                     />
-
-                    <RiImageEditLine
-                      size={24}
-                      className="absolute bottom-0 right-0 bg-white rounded-full p-1"
-                    />
-                  </div>
-                </label>
+                    <div className="w-full h-full rounded-full overflow-hidden">
+                      <img
+                        src={
+                          preview
+                            ? preview
+                            : profileData.profilePic
+                              ? profileData.profilePic.startsWith("http")
+                                ? profileData.profilePic
+                                : `${base_url}/uploadImg/${profileData.profilePic}`
+                              : "https://static.vecteezy.com/system/resources/thumbnails/037/468/797/small/user-icon-illustration-for-graphic-design-logo-web-site-social-media-mobile-app-ui-png.png"
+                        }
+                        alt="profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute bottom-0 right-0 p-2 bg-[#C5A880] text-white rounded-full border-2 border-white shadow-md hover:bg-[#0D2818] transition-colors duration-200">
+                      <RiImageEditLine size={14} />
+                    </div>
+                  </label>
+                </div>
 
                 {/* INPUTS */}
-                <input
-                  type="text"
-                  className="w-full bg-white border rounded-sm my-3 py-2 p-2"
-                  value={profileData.username}
-                  onChange={(e) =>
-                    setProfileData({ ...profileData, username: e.target.value })
-                  }
-                  placeholder="Username"
-                />
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Username</label>
+                  <input
+                    type="text"
+                    className={inputClass}
+                    value={profileData.username}
+                    onChange={(e) => setProfileData({ ...profileData, username: e.target.value })}
+                    placeholder="Admin username"
+                  />
+                </div>
 
-                <input
-                  type="text"
-                  className="w-full bg-white border rounded-sm my-3 py-2 p-2"
-                  value={profileData.email}
-                  disabled
-                  placeholder="Email"
-                />
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Email Address</label>
+                  <input
+                    type="text"
+                    className={`${inputClass} opacity-60 cursor-not-allowed`}
+                    value={profileData.email}
+                    disabled
+                    placeholder="Email (read-only)"
+                  />
+                </div>
 
-                <input
-                  type="password"
-                  className="w-full bg-white border rounded-sm my-3 py-2 p-2"
-                  value={profileData.password}
-                  onChange={(e) =>
-                    setProfileData({ ...profileData, password: e.target.value })
-                  }
-                  placeholder="Password"
-                />
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Password</label>
+                  <input
+                    type="password"
+                    className={inputClass}
+                    value={profileData.password}
+                    onChange={(e) => setProfileData({ ...profileData, password: e.target.value })}
+                    placeholder="••••••••"
+                  />
+                </div>
 
-                <input
-                  type="password"
-                  className="w-full bg-white border rounded-sm my-3 py-2 p-2"
-                  value={profileData.confirmPassword}
-                  onChange={(e) =>
-                    setProfileData({ ...profileData, confirmPassword: e.target.value })
-                  }
-                  placeholder="Confirm Password"
-                />
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Confirm Password</label>
+                  <input
+                    type="password"
+                    className={inputClass}
+                    value={profileData.confirmPassword}
+                    onChange={(e) => setProfileData({ ...profileData, confirmPassword: e.target.value })}
+                    placeholder="••••••••"
+                  />
+                </div>
 
                 {/* BUTTONS */}
-                <div className="grid grid-cols-2 gap-2 mt-4">
+                <div className="grid grid-cols-2 gap-3 pt-2">
                   <button
                     onClick={handleReset}
-                    className="bg-red-500 text-white p-3 rounded"
+                    className="py-3 rounded-xl text-red-600 bg-red-50 hover:bg-red-500 hover:text-white transition duration-300 font-semibold text-xs uppercase tracking-[1.5px] border border-transparent"
                   >
                     Reset
                   </button>
 
                   <button
                     onClick={handleProfileEdit}
-                    className="bg-green-500 text-white p-3 rounded"
+                    className="py-3 rounded-xl bg-[#C5A880] text-[#0D2818] hover:bg-[#0D2818] hover:text-[#C5A880] transition duration-300 font-semibold text-xs uppercase tracking-[1.5px] border border-[#C5A880]/30 shadow-sm"
                   >
-                    Update
+                    Save Changes
                   </button>
                 </div>
 

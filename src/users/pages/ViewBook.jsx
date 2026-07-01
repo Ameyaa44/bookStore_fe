@@ -55,91 +55,104 @@ function ViewBook() {
       <Header />
 
       {/* PAGE WRAPPER */}
-      <div className="min-h-[60vh] bg-[#F8F5F0] px-4 py-10 md:px-10">
+      <div className="min-h-[80vh] bg-[#FAF7F2] px-6 py-12 md:px-12 transition-all duration-300">
+        <div className="max-w-6xl mx-auto">
 
-        {/* BOOK CARD */}
-        <div className="bg-white rounded-3xl shadow-xl p-7 md:grid grid-cols-4 gap-8 border border-[#e8e3db]">
+          {/* BOOK DETAIL CARD */}
+          <div className="bg-white rounded-3xl shadow-sm p-8 md:p-12 md:grid grid-cols-4 gap-12 border border-[#E3DAC9]/60 relative">
 
-          {/* IMAGE */}
-          <div className="col-span-1">
-            <img
-              src={bookData?.image}
-              alt="book"
-              className="w-full h-full object-cover rounded-2xl shadow-lg hover:scale-105 transition duration-300"
-            />
-          </div>
-
-          {/* DETAILS */}
-          <div className="col-span-3">
-
-            {/* TITLE */}
-            <h1 className="text-center font-bold text-3xl text-[#1B4332]">
-              {bookData?.title}
-            </h1>
-
-            {/* AUTHOR */}
-            <p className="text-center text-[#BC6C25] text-lg font-medium mt-1">
-              {bookData?.author}
-            </p>
-
-            {/* VIEW ICON */}
-            <div className="flex justify-end mt-3">
-              <button
-                className="text-xl text-[#1B4332] hover:text-[#BC6C25] transition"
-                onClick={() => setModalStatus(true)}
-              >
-                <FaEye />
-              </button>
+            {/* IMAGE CONTAINER WITH SPINE SHADOW */}
+            <div className="col-span-1 relative h-fit overflow-hidden rounded-2xl shadow-md border border-[#E3DAC9]/40 group">
+              <img
+                src={bookData?.image}
+                alt="book"
+                className="w-full h-auto object-cover group-hover:scale-[1.02] transition duration-500"
+              />
+              <div className="absolute inset-y-0 left-0 w-3.5 bg-gradient-to-r from-black/25 to-transparent"></div>
             </div>
 
-            {/* INFO GRID */}
-            <div className="my-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            {/* DETAILS */}
+            <div className="col-span-3 flex flex-col justify-between mt-8 md:mt-0">
 
-              <span className="font-semibold bg-[#F8F5F0] p-3 rounded-xl text-[#1B4332]">
-                Publisher : {bookData?.publisher}
-              </span>
+              <div>
+                {/* HEADINGS */}
+                <h1 className="font-serif-display font-bold text-3xl md:text-4xl text-[#0D2818] tracking-wide">
+                  {bookData?.title}
+                </h1>
 
-              <span className="font-semibold bg-[#F8F5F0] p-3 rounded-xl text-[#1B4332]">
-                Language : {bookData?.language}
-              </span>
+                <p className="text-lg font-serif-sub italic text-[#C5A880] mt-2 font-medium">
+                  by {bookData?.author}
+                </p>
 
-              <span className="font-semibold bg-[#F8F5F0] p-3 rounded-xl text-[#1B4332]">
-                Pages : {bookData?.noOfPages}
-              </span>
+                {/* VIEW IMAGE TRIGGERS */}
+                <div className="flex justify-end mt-2">
+                  <button
+                    className="flex items-center gap-2 text-sm text-[#C5A880] hover:text-[#0D2818] font-medium transition-colors duration-300 border border-[#C5A880]/20 hover:border-[#C5A880] px-4 py-2 rounded-full"
+                    onClick={() => setModalStatus(true)}
+                  >
+                    <span>View Cover Files</span>
+                    <FaEye />
+                  </button>
+                </div>
 
-              <span className="font-semibold bg-[#F8F5F0] p-3 rounded-xl text-[#1B4332]">
-                Seller : {bookData?.userMail}
-              </span>
+                {/* INFO GRID */}
+                <div className="my-8 grid grid-cols-2 md:grid-cols-3 gap-5 text-sm">
+                  <div className="border border-[#E3DAC9]/50 p-4 rounded-2xl flex flex-col bg-[#FAF7F2]/50">
+                    <span className="text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1">Publisher</span>
+                    <span className="font-medium text-[#0D2818] truncate">{bookData?.publisher}</span>
+                  </div>
 
-              <span className="font-semibold bg-[#F8F5F0] p-3 rounded-xl text-[#1B4332]">
-                Price : ₹{bookData?.price}
-              </span>
+                  <div className="border border-[#E3DAC9]/50 p-4 rounded-2xl flex flex-col bg-[#FAF7F2]/50">
+                    <span className="text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1">Language</span>
+                    <span className="font-medium text-[#0D2818] capitalize">{bookData?.language}</span>
+                  </div>
 
-              <span className="font-semibold bg-[#F8F5F0] p-3 rounded-xl text-[#1B4332]">
-                ISBN : {bookData?.isbn}
-              </span>
-            </div>
+                  <div className="border border-[#E3DAC9]/50 p-4 rounded-2xl flex flex-col bg-[#FAF7F2]/50">
+                    <span className="text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1">Total Pages</span>
+                    <span className="font-medium text-[#0D2818]">{bookData?.noOfPages}</span>
+                  </div>
 
-            {/* ABSTRACT */}
-            <p className="my-6 text-justify leading-8 text-gray-700">
-              {bookData?.abstract}
-            </p>
+                  <div className="border border-[#E3DAC9]/50 p-4 rounded-2xl flex flex-col bg-[#FAF7F2]/50">
+                    <span className="text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1">Owner Contact</span>
+                    <span className="font-medium text-[#0D2818] truncate">{bookData?.userMail}</span>
+                  </div>
 
-            {/* BUTTONS */}
-            <div className="flex md:justify-end justify-center gap-5">
+                  <div className="border border-[#E3DAC9]/50 p-4 rounded-2xl flex flex-col bg-[#FAF7F2]/50">
+                    <span className="text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1">Original Price</span>
+                    <span className="font-medium text-[#0D2818]">₹{bookData?.price}</span>
+                  </div>
 
-              <Link to={"/books"}>
-                <button className="flex gap-2 bg-[#1B4332] items-center px-5 py-3 rounded-xl text-white hover:bg-[#143126] transition">
-                  <FaAnglesLeft /> Back
+                  <div className="border border-[#E3DAC9]/50 p-4 rounded-2xl flex flex-col bg-[#FAF7F2]/50">
+                    <span className="text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1">ISBN Reference</span>
+                    <span className="font-medium text-[#0D2818]">{bookData?.isbn}</span>
+                  </div>
+                </div>
+
+                {/* ABSTRACT */}
+                <div className="border-t border-[#FAF7F2] pt-6 mb-8">
+                  <h3 className="text-xs uppercase tracking-[2px] font-semibold text-[#C5A880] mb-3">Abstract & Synopsis</h3>
+                  <p className="text-justify text-sm leading-8 text-[#0D2818]/80 font-light">
+                    {bookData?.abstract}
+                  </p>
+                </div>
+              </div>
+
+              {/* BUTTONS */}
+              <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t border-[#E3DAC9]/40">
+                <Link to={"/books"} className="w-full sm:w-auto">
+                  <button className="w-full flex items-center justify-center gap-2 bg-[#0D2818] text-[#C5A880] hover:bg-[#FAF7F2] hover:text-[#0D2818] hover:border-[#C5A880]/60 border border-transparent px-8 py-3.5 rounded-xl font-semibold text-xs uppercase tracking-[2px] transition duration-300">
+                    <FaAnglesLeft size={10} /> Back
+                  </button>
+                </Link>
+
+                <button
+                  onClick={handlePayment}
+                  className="w-full sm:w-auto bg-[#C5A880] text-[#0D2818] hover:bg-[#0D2818] hover:text-[#C5A880] border border-[#C5A880] px-10 py-3.5 rounded-xl font-semibold text-xs uppercase tracking-[2px] transition duration-300 shadow-md hover:shadow-lg"
+                >
+                  Buy Edition for ₹{bookData?.discountPrice}
                 </button>
-              </Link>
+              </div>
 
-              <button
-                onClick={handlePayment}
-                className="bg-[#BC6C25] text-white px-6 py-3 rounded-xl hover:bg-[#a85d1f] transition shadow-md"
-              >
-                Buy ₹{bookData?.discountPrice}
-              </button>
             </div>
           </div>
         </div>
@@ -147,49 +160,47 @@ function ViewBook() {
         {/* MODAL */}
         {modalStatus && (
           <div
-            className="relative z-10"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm"
             onClick={() => setModalStatus(false)}
           >
-            <div className="bg-black/70 fixed inset-0 backdrop-blur-sm flex justify-center items-center">
+            <div
+              className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-4xl w-full flex flex-col border border-[#E3DAC9]/60"
+              style={{ maxHeight: "90vh" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* HEADER */}
+              <div className="bg-[#0D2818] text-white flex justify-between items-center px-6 py-5 border-b border-[#C5A880]/30">
+                <h1 className="font-serif-display text-lg tracking-[1px] font-semibold text-[#C5A880]">Cover & In-Hand Verification</h1>
+                <button onClick={() => setModalStatus(false)} className="text-[#C5A880] hover:text-white p-1 transition duration-200">
+                  <IoClose size={24} />
+                </button>
+              </div>
 
-              <div
-                className="bg-white rounded-3xl shadow-2xl overflow-hidden"
-                style={{ height: "500px", width: "900px" }}
-                onClick={(e) => e.stopPropagation()}
-              >
+              {/* DETAILS TITLE */}
+              <div className="px-6 py-4 bg-[#FAF7F2] border-b border-[#E3DAC9]/40 flex gap-3 items-center">
+                <FaCamera className="text-[#C5A880] text-lg" />
+                <span className="text-xs font-semibold text-[#0D2818] uppercase tracking-[1.5px]">Authenticity clicks uploaded by the seller</span>
+              </div>
 
-                {/* HEADER */}
-                <div className="bg-[#1B4332] text-white flex justify-between items-center p-4">
-                  <h1 className="text-lg">Book Images</h1>
-
-                  <button onClick={() => setModalStatus(false)}>
-                    <IoClose />
-                  </button>
-                </div>
-
-                {/* TITLE */}
-                <h2 className="text-lg text-[#BC6C25] flex gap-3 items-center m-4 font-medium">
-                  <FaCamera />
-                  Camera click of the book in the hand of seller
-                </h2>
-
-                {/* IMAGES */}
-                <div className="flex gap-5 overflow-x-auto p-4">
-                  {bookData?.uploadImg?.length > 0 ? (
-                    bookData.uploadImg.map((item, index) => (
+              {/* IMAGES */}
+              <div className="flex gap-6 overflow-x-auto p-8 bg-white justify-center items-center">
+                {bookData?.uploadImg?.length > 0 ? (
+                  bookData.uploadImg.map((item, index) => (
+                    <div key={index} className="relative rounded-2xl overflow-hidden border border-[#E3DAC9]/60 shadow-md flex-shrink-0 group">
                       <img
-                        key={index}
                         src={`${base_url}/uploadImg/${item}`}
-                        alt="book"
-                        className="w-[300px] rounded-2xl shadow-lg"
+                        alt="book verification"
+                        className="h-[300px] w-auto object-cover group-hover:scale-105 transition duration-500"
                       />
-                    ))
-                  ) : (
-                    <h2 className="text-red-500 text-xl">
-                      No Images
+                    </div>
+                  ))
+                ) : (
+                  <div className="py-20 text-center col-span-full">
+                    <h2 className="text-red-500/80 font-light text-base uppercase tracking-[1.5px]">
+                      No verification photos uploaded.
                     </h2>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

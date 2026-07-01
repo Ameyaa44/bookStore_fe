@@ -25,71 +25,62 @@ function AdminSidebar() {
         }
     }, [adminProfileStatus]);
 
-    const activeStyle = "text-emerald-700 font-semibold"
-    const baseItemStyle = "flex gap-2 items-center my-3 text-gray-700 hover:text-emerald-700 transition"
+    const isActive = (path) => location.pathname === path;
+
+    const navLinks = [
+        { path: '/admin-dashboard', icon: <IoMdHome size={16} />, label: 'Dashboard' },
+        { path: '/admin-books',     icon: <FaBook size={14} />,    label: 'Resources' },
+        { path: '/admin-career',    icon: <IoBagAdd size={16} />,  label: 'Careers' },
+        { path: '/admin-settings',  icon: <IoSettingsSharp size={15} />, label: 'Settings' },
+    ]
 
     return (
-        <div className="bg-white border-r border-gray-200 min-h-full flex flex-col items-center justify-center py-10 shadow-sm">
+        <div className="bg-[#0D2818] border-r border-[#C5A880]/10 min-h-full flex flex-col items-center py-10 px-4">
 
-            <img
-                src={
-                    profilelogo
-                        ? profilelogo.startsWith("https://lh3.googleusercontent.com")
-                            ? profilelogo
-                            : `${base_url}/uploadImg/${profilelogo}`
-                        : "https://static.vecteezy.com/system/resources/thumbnails/037/468/797/small/user-icon-illustration-for-graphic-design-logo-web-site-social-media-mobile-app-ui-png.png"
-                }
-                alt="admin"
-                className='w-[120px] h-[120px] rounded-full border-4 border-emerald-100'
-            />
+            {/* Profile Image */}
+            <div className="w-[100px] h-[100px] rounded-full border-2 border-[#C5A880]/40 p-0.5 mb-4">
+                <img
+                    src={
+                        profilelogo
+                            ? profilelogo.startsWith("https://lh3.googleusercontent.com")
+                                ? profilelogo
+                                : `${base_url}/uploadImg/${profilelogo}`
+                            : "https://static.vecteezy.com/system/resources/thumbnails/037/468/797/small/user-icon-illustration-for-graphic-design-logo-web-site-social-media-mobile-app-ui-png.png"
+                    }
+                    alt="admin"
+                    className='w-full h-full rounded-full object-cover'
+                />
+            </div>
 
-            <h1 className="my-3 font-semibold flex items-center gap-3 text-gray-800">
-                {username}
-                <button onClick={() => setCollapse(!collapse)} className="text-emerald-700">
-                    <GiHamburgerMenu />
+            {/* Username + toggle */}
+            <div className="flex items-center gap-2 mb-6">
+                <span className="text-white font-semibold text-sm tracking-wide">{username || "Admin"}</span>
+                <button onClick={() => setCollapse(!collapse)} className="text-[#C5A880] hover:text-white transition">
+                    <GiHamburgerMenu size={14} />
                 </button>
-            </h1>
+            </div>
 
+            {/* Divider */}
+            <div className="w-full border-t border-[#C5A880]/10 mb-6"></div>
+
+            {/* Nav Links */}
             {!collapse && (
-                <div>
-
-                    <div className={baseItemStyle}>
-                        <input type="radio" checked={location.pathname === '/admin-dashboard'} readOnly />
-                        <Link to={'/admin-dashboard'}>
-                            <label className={location.pathname === '/admin-dashboard' ? activeStyle : ""}>
-                                <IoMdHome /> Home
-                            </label>
+                <nav className="w-full space-y-1">
+                    {navLinks.map(({ path, icon, label }) => (
+                        <Link
+                            key={path}
+                            to={path}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-medium ${
+                                isActive(path)
+                                    ? 'bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/20'
+                                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                            }`}
+                        >
+                            <span className={isActive(path) ? 'text-[#C5A880]' : 'text-white/40'}>{icon}</span>
+                            {label}
                         </Link>
-                    </div>
-
-                    <div className={baseItemStyle}>
-                        <input type="radio" checked={location.pathname === '/admin-books'} readOnly />
-                        <Link to={'/admin-books'}>
-                            <label className={location.pathname === '/admin-books' ? activeStyle : ""}>
-                                <FaBook /> Resources
-                            </label>
-                        </Link>
-                    </div>
-
-                    <div className={baseItemStyle}>
-                        <input type="radio" checked={location.pathname === '/admin-career'} readOnly />
-                        <Link to={'/admin-career'}>
-                            <label className={location.pathname === '/admin-career' ? activeStyle : ""}>
-                                <IoBagAdd /> Careers
-                            </label>
-                        </Link>
-                    </div>
-
-                    <div className={baseItemStyle}>
-                        <input type="radio" checked={location.pathname === '/admin-settings'} readOnly />
-                        <Link to={'/admin-settings'}>
-                            <label className={location.pathname === '/admin-settings' ? activeStyle : ""}>
-                                <IoSettingsSharp /> Settings
-                            </label>
-                        </Link>
-                    </div>
-
-                </div>
+                    ))}
+                </nav>
             )}
 
         </div>

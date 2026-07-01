@@ -103,53 +103,75 @@ function Edit() {
 
   return (
     <>
-      <button className='text-blue-600 border border-r-blue-700 rounded-sm px-3 py-2 flex items-center gap-1 justify-center hover:bg-blue-700 hover:text-white'
+      <button className='text-[#C5A880] border border-[#C5A880]/60 hover:bg-[#C5A880] hover:text-[#0D2818] rounded-xl px-5 py-2.5 flex items-center gap-2 justify-center transition-all duration-300 font-semibold text-xs uppercase tracking-[1px]'
         onClick={()=>setModalStatus(true)}>
-        Edit
-        <FaPen size={14} />
+        <span>Edit Profile</span>
+        <FaPen size={11} />
       </button>
       {modalStatus && (
-          <div className="relative z-10" >
-            <div className="bg-gray-500/75 fixed inset-0">
-              <div className="flex justify-center items-center min-h-screen">
-                <div style={{height:'100vh', width: "400px" }} className="bg-white rounded-2xl flex flex-col justify-between  ">
-                  <div className="bg-black text-white flex justify-between items-center p-3 rounded-t-2xl">
-                    <h1 className="text-2xl font-bold">Edit Profile</h1>
-                    <button onClick={()=>setModalStatus(false)}>
-                      <IoClose />
-                    </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl shadow-2xl flex flex-col justify-between w-full max-w-[420px] border border-[#E3DAC9]/60 overflow-hidden" style={{ maxHeight: '90vh' }}>
+            
+            {/* MODAL HEADER */}
+            <div className="bg-[#0D2818] text-white flex justify-between items-center px-6 py-5 border-b border-[#C5A880]/30">
+              <h1 className="font-serif-display text-lg tracking-[1px] font-semibold text-[#C5A880]">Edit Reader Profile</h1>
+              <button onClick={()=>setModalStatus(false)} className="text-[#C5A880] hover:text-white transition duration-200">
+                <IoClose size={24} />
+              </button>
+            </div>
+
+            {/* MODAL BODY */}
+            <div className="p-6 overflow-y-auto space-y-6">
+              {/* IMAGE UPLOAD CONTAINER */}
+              <div className="flex justify-center">
+                <label htmlFor="profilepic" className='relative cursor-pointer group flex justify-center items-center w-[150px] h-[150px] rounded-full border-2 border-[#C5A880]/40 p-1 shadow-inner hover:border-[#C5A880] transition-colors duration-300'>
+                  <input type="file" name="" id="profilepic" className='hidden' onChange={(e)=>{handleImageUpload(e)}}/>
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    {preview ? (
+                      <img src={preview} className='w-full h-full object-cover' alt="profile" />
+                    ) : (
+                      <img src={profileData.profile ? (profileData.profile.startsWith("https://lh3.googleusercontent.com") ? profileData.profile : `${base_url}/uploadImg/${profileData.profile}`) : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} className='w-full h-full object-cover' alt="profile" />
+                    )}
                   </div>
-                  <div className="p-5">
-                    <label htmlFor="profilepic" className='flex justify-center relative cursor-pointer'>
-                      <input type="file" name="" id="profilepic" className='hidden' onChange={(e)=>{handleImageUpload(e)}}/>
-                      {
-                        preview ?
-                        <img src={preview} 
-                         className=' rounded-full' width={'200px'} />
-                        :
-                        <img src={profileData.profile?(profileData.profile.startsWith("https://lh3.googleusercontent.com/a/ACg8ocIXufSvLUE46Oia28aUiKklAIqnHjhYZImAfJjOVhGScOzitfum=s96-c")?profileData.profile:`${base_url}/uploadImg/${profileData.profile}`):"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
-                         className=' rounded-full' width={'200px'} />
-                      }
-                      <button className='p-3 bg-amber-700 text-2xl text-white absolute rounded bottom-5 right-35'>
-                        <FaPen />
-                      </button>
-                    </label>
-                    <div className='py-5 flex flex-col gap-4 mb-4'>
-                      <input type="text" placeholder="Username" defaultValue={profileData.username} onChange={(e)=>{setProfileData({...profileData,username:e.target.value})}} className="p-2 border bg-white placeholder-gray-600 rounded-sm w-full mb-2"/>
-                      <input type="text" placeholder="password" defaultValue={profileData.password} onChange={(e)=>{setProfileData({...profileData,password:e.target.value})}} className="p-2 border bg-white placeholder-gray-600 rounded-sm w-full mb-2"/>
-                      <input type="password" placeholder="Confirm Password" defaultValue={profileData.cpassword} onChange={(e)=>{setProfileData({...profileData,cpassword:e.target.value})}} className="p-2 border bg-white placeholder-gray-600 rounded-sm w-full mb-2"/>
-                      <textarea name="" placeholder="Bio" value={profileData.bio} onChange={(e)=>{setProfileData({...profileData,bio:e.target.value})}} className="p-2 border bg-white placeholder-gray-600 rounded-sm w-full " id="">{profileData.bio}</textarea>
-                    </div>
+                  <div className='p-2.5 bg-[#C5A880] text-white absolute rounded-full bottom-0 right-1 border-2 border-white shadow-md hover:bg-[#0D2818] transition-colors duration-200'>
+                    <FaPen size={12} />
                   </div>
-                  <div className="bg-gray p-3 flex justify-end gap-2 rounded-b-2xl">
-                    <button className="p-2 border rounded-sm bg-red-500 text-white hover:bg-white hover:border-red-600 hover:text-red-500">Reset</button>
-                    <button onClick={handleSubmit} className="p-2 border rounded-sm bg-green-700 text-white hover:bg-white hover:border-green-600 hover:text-green-500">Submit</button>
-                  </div>
+                </label>
+              </div>
+
+              {/* INPUT FIELDS */}
+              <div className='space-y-4 pt-2'>
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Username</label>
+                  <input type="text" placeholder="Username" defaultValue={profileData.username} onChange={(e)=>{setProfileData({...profileData,username:e.target.value})}} className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"/>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Password</label>
+                  <input type="text" placeholder="••••••••" defaultValue={profileData.password} onChange={(e)=>{setProfileData({...profileData,password:e.target.value})}} className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"/>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Confirm Password</label>
+                  <input type="password" placeholder="••••••••" defaultValue={profileData.cpassword} onChange={(e)=>{setProfileData({...profileData,cpassword:e.target.value})}} className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"/>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1 ml-1">Biography</label>
+                  <textarea placeholder="Write a short literary bio..." value={profileData.bio} onChange={(e)=>{setProfileData({...profileData,bio:e.target.value})}} className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200" rows={3}></textarea>
                 </div>
               </div>
             </div>
+
+            {/* MODAL FOOTER */}
+            <div className="bg-[#FAF7F2] p-5 border-t border-[#E3DAC9]/60 flex justify-end gap-3 rounded-b-3xl">
+              <button className="px-5 py-3 border border-transparent rounded-xl text-red-600 bg-red-50 hover:bg-red-600 hover:text-white transition duration-300 font-semibold text-xs uppercase tracking-[1.5px]">Reset</button>
+              <button onClick={handleSubmit} className="px-7 py-3 border border-[#C5A880] bg-[#C5A880] text-[#0D2818] hover:bg-[#0D2818] hover:text-[#C5A880] transition duration-300 font-semibold text-xs uppercase tracking-[1.5px] rounded-xl shadow-sm">Save Changes</button>
+            </div>
+
           </div>
-        )}
+        </div>
+      )}
     </>
   )
 }

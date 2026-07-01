@@ -107,8 +107,7 @@ export const getProfileApi=async()=>{
 //Apply for Job
 export const applyJobPostApi=async(data)=>{
     const header={
-        "Authorization":`Token ${sessionStorage.getItem('token')}`,
-        "Content-Type":"multi-part/form-data"
+        "Authorization":`Token ${sessionStorage.getItem('token')}`
     }
     return await commonApi(`${base_url}/apply-jobpost`,'POST',data,header)
 }
@@ -118,7 +117,7 @@ export const purchaseBookApi=async(data)=>{
     const header={
         "Authorization":`Token ${sessionStorage.getItem('token')}`,
     }
-    return await commonApi(`${base_url}/purchase-book`,'POST',data,header)
+    return await commonApi(`${base_url}/purchase-book`,'POST',data)
 }
 
 

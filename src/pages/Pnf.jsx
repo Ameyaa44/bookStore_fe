@@ -9,9 +9,11 @@ function PageNotFound() {
         <h1 className='text-center my-2'>Oh no!</h1>
         <h2 className='text-center text-xl my-2'>Looks Like You're Lost</h2>
         <h5 className='text-center my-2'>The page you are looking for is not available</h5>
-        <div className='flex justify-center my-2'>
+        <h5 className='text-center my-2 text-red-500'>Please Login to access the Bookstore.!!</h5>
+        <div className='flex justify-center my-2 gap-5'>
 
-          <Link to={'/'} className='bg-blue-700 p-3 rounded-xl'>Go Back</Link>
+          <Link to={'/'} className='bg-blue-700 p-2.5 rounded-xl'>Go Back</Link>
+          <Link to={'/login'} className='bg-green-700 p-2.5 rounded-xl'>Login</Link>
         </div>
       </div>
       

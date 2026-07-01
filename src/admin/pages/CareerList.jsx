@@ -58,7 +58,7 @@ function CareerList() {
     <>
       <AdminHeader />
 
-      <div className="min-h-[60vh] grid grid-cols-1 md:grid-cols-4 bg-gray-50">
+      <div className="min-h-[80vh] grid grid-cols-1 md:grid-cols-4 bg-[#FAF7F2]">
 
         {/* Sidebar */}
         <div className="md:col-span-1">
@@ -66,90 +66,83 @@ function CareerList() {
         </div>
 
         {/* Main */}
-        <div className="md:col-span-3 p-5">
+        <div className="md:col-span-3 px-4 md:px-6 py-6">
 
-          <h1 className="text-center text-3xl font-bold text-gray-800 my-6">
-            Career Management
-          </h1>
+          <div className="mb-6">
+            <h1 className="font-serif-display text-2xl font-bold text-[#0D2818]">Career Management</h1>
+            <p className="text-xs text-[#0D2818]/50 mt-1 uppercase tracking-[1.5px]">Job listings & incoming applications</p>
+          </div>
 
           {/* Tabs */}
-          <div className="flex justify-center my-5">
-            <div
-              onClick={() => {
-                setJobStatus(true);
-                setApplicationStatus(false);
-              }}
-              className={
-                jobStatus
-                  ? "px-5 py-2 border-t-2 border-blue-600 text-blue-600 font-semibold cursor-pointer"
-                  : "px-5 py-2 border-b text-gray-600 cursor-pointer"
-              }
+          <div className='inline-flex bg-white rounded-xl border border-[#E3DAC9]/60 p-1 mb-7 shadow-sm'>
+            <button
+              onClick={() => { setJobStatus(true); setApplicationStatus(false); }}
+              className={`px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-[1px] transition-all duration-200 ${
+                jobStatus ? 'bg-[#0D2818] text-[#C5A880] shadow-sm' : 'text-[#0D2818]/60 hover:text-[#0D2818]'
+              }`}
             >
               Job Posts
-            </div>
+            </button>
 
-            <div
-              onClick={() => {
-                setJobStatus(false);
-                setApplicationStatus(true);
-              }}
-              className={
-                applicationStatus
-                  ? "px-5 py-2 border-t-2 border-green-600 text-green-600 font-semibold cursor-pointer"
-                  : "px-5 py-2 border-b text-gray-600 cursor-pointer"
-              }
+            <button
+              onClick={() => { setJobStatus(false); setApplicationStatus(true); }}
+              className={`px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-[1px] transition-all duration-200 ${
+                applicationStatus ? 'bg-[#0D2818] text-[#C5A880] shadow-sm' : 'text-[#0D2818]/60 hover:text-[#0D2818]'
+              }`}
             >
               Applications
-            </div>
+            </button>
           </div>
 
           {/* JOB SECTION */}
           {jobStatus && (
             <>
-              <div className="flex justify-between items-center px-5 mb-5">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
                 <input
                   type="text"
                   placeholder="Search job title..."
-                  className="border p-2 rounded-md w-[250px] focus:outline-blue-500"
+                  className="p-3 pl-4 bg-white border border-[#E3DAC9]/60 text-sm rounded-xl text-[#0D2818] placeholder-[#0D2818]/40 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition w-full sm:w-[260px]"
                   onChange={(e) => setsearchKey(e.target.value)}
                 />
-
                 <AddJobPost />
               </div>
 
-              <div className="grid gap-5 px-5">
+              <div className="grid gap-4">
                 {jobList.length > 0 ? (
                   jobList.map((job) => (
-                    <div className="bg-white shadow-md rounded-xl p-5 border border-gray-200 hover:shadow-lg transition">
+                    <div key={job._id} className="bg-white border border-[#E3DAC9]/60 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
 
-                      <div className="flex justify-between">
-                        <h2 className="text-xl font-bold text-gray-800">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <h2 className="font-serif-display text-lg font-semibold text-[#0D2818]">
                           {job.title}
                         </h2>
 
                         <button
                           onClick={() => deleteJobPost(job?._id)}
-                          className="flex items-center gap-2 bg-red-100 text-red-600 px-3 py-1 rounded-md hover:bg-red-600 hover:text-white transition"
+                          className="flex items-center gap-2 bg-red-50 text-red-500 border border-red-200 hover:bg-red-500 hover:text-white hover:border-red-500 px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-[1px] transition-all duration-300"
                         >
-                          Delete <FaTrash />
+                          <FaTrash size={10} /> Delete
                         </button>
                       </div>
 
-                      <p className="flex items-center gap-2 text-blue-600 mt-3">
+                      <p className="flex items-center gap-1.5 text-xs text-[#C5A880] font-semibold uppercase tracking-[1px] mt-3">
                         <FaLocationDot /> {job.location}
                       </p>
 
-                      <div className="mt-3 text-gray-700 space-y-1">
-                        <p><b>Type:</b> {job.jobType}</p>
-                        <p><b>Salary:</b> {job.salary}</p>
-                        <p><b>Qualification:</b> {job.qualification}</p>
-                        <p><b>Experience:</b> {job.experience}</p>
-                        <p className="text-gray-600 mt-2">{job.description}</p>
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        <span className="bg-[#FAF7F2] border border-[#E3DAC9]/50 px-3 py-1 rounded-full text-xs text-[#0D2818]/70">Type: {job.jobType}</span>
+                        <span className="bg-[#FAF7F2] border border-[#E3DAC9]/50 px-3 py-1 rounded-full text-xs text-[#0D2818]/70">Salary: {job.salary}</span>
+                        <span className="bg-[#FAF7F2] border border-[#E3DAC9]/50 px-3 py-1 rounded-full text-xs text-[#0D2818]/70">Qualification: {job.qualification}</span>
+                        <span className="bg-[#FAF7F2] border border-[#E3DAC9]/50 px-3 py-1 rounded-full text-xs text-[#0D2818]/70">Experience: {job.experience}</span>
                       </div>
+
+                      <p className="text-xs text-[#0D2818]/60 mt-4 leading-6 font-light">{job.description}</p>
                     </div>
                   ))
                 ) : (
-                  <p className="text-center text-red-500">No Job Posts Available</p>
+                  <div className="text-center py-12 bg-white border border-[#E3DAC9]/50 rounded-2xl">
+                    <p className="text-red-500/70 font-light uppercase tracking-[1px] text-sm">No Job Posts Available</p>
+                  </div>
                 )}
               </div>
             </>
@@ -157,39 +150,38 @@ function CareerList() {
 
           {/* APPLICATION SECTION */}
           {applicationStatus && (
-            <div className="px-5 mt-5">
-
+            <div className="mt-2">
               {applicationList.length > 0 ? (
-                <div className="overflow-x-auto bg-white shadow rounded-lg">
-                  <table className="min-w-[900px] w-full border">
+                <div className="overflow-x-auto rounded-2xl border border-[#E3DAC9]/60 shadow-sm">
+                  <table className="min-w-[900px] w-full bg-white">
 
-                    <thead className="bg-blue-600 text-white">
-                      <tr>
-                        <th className="p-2">#</th>
-                        <th className="p-2">Job</th>
-                        <th className="p-2">Name</th>
-                        <th className="p-2">Qualification</th>
-                        <th className="p-2">Email</th>
-                        <th className="p-2">Phone</th>
-                        <th className="p-2">Cover Letter</th>
-                        <th className="p-2">Resume</th>
+                    <thead>
+                      <tr className="bg-[#0D2818] text-[#C5A880]">
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">#</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Job</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Name</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Qualification</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Email</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Phone</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Cover Letter</th>
+                        <th className="p-3.5 text-xs font-semibold uppercase tracking-[1px] text-left">Resume</th>
                       </tr>
                     </thead>
 
                     <tbody>
                       {applicationList.map((a, i) => (
-                        <tr key={i} className="text-center border-b hover:bg-gray-50">
-                          <td className="p-2">{i + 1}</td>
-                          <td className="p-2">{a.jobTitle}</td>
-                          <td className="p-2">{a.fullname}</td>
-                          <td className="p-2">{a.qualification}</td>
-                          <td className="p-2">{a.email}</td>
-                          <td className="p-2">{a.phone}</td>
-                          <td className="p-2 max-w-[200px]">{a.coverletter}</td>
-                          <td className="p-2">
+                        <tr key={i} className={`border-b border-[#E3DAC9]/40 hover:bg-[#FAF7F2] transition text-sm text-[#0D2818]/80 ${i % 2 === 0 ? '' : 'bg-[#FAF7F2]/40'}`}>
+                          <td className="p-3.5 text-[#C5A880] font-semibold">{i + 1}</td>
+                          <td className="p-3.5 font-medium">{a.jobTitle}</td>
+                          <td className="p-3.5">{a.fullname}</td>
+                          <td className="p-3.5">{a.qualification}</td>
+                          <td className="p-3.5 text-xs">{a.email}</td>
+                          <td className="p-3.5 text-xs">{a.phone}</td>
+                          <td className="p-3.5 max-w-[180px] text-xs text-[#0D2818]/60 truncate">{a.coverletter}</td>
+                          <td className="p-3.5">
                             <a
                               href={`${base_url}/resumes/${a.resume}`}
-                              className="text-blue-600 underline"
+                              className="text-xs text-[#C5A880] font-semibold underline hover:text-[#0D2818] transition"
                             >
                               View
                             </a>
@@ -201,11 +193,10 @@ function CareerList() {
                   </table>
                 </div>
               ) : (
-                <p className="text-center text-red-500 text-lg">
-                  No Applications Available
-                </p>
+                <div className="text-center py-12 bg-white border border-[#E3DAC9]/50 rounded-2xl">
+                  <p className="text-red-500/70 font-light uppercase tracking-[1px] text-sm">No Applications Available</p>
+                </div>
               )}
-
             </div>
           )}
 

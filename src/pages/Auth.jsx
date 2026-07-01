@@ -27,7 +27,7 @@ function Auth({ register }) {
       toast.success("Signup Successful")
       setUser({ username: "", email: "", password: "" })
       navigate('/login')
-    } else toast.error("Signup Failed")
+    } else toast.error("User Already Exist!")
   }
 
   const handleLogin = async () => {
@@ -81,27 +81,28 @@ function Auth({ register }) {
   }
 
   return (
-  <div className="min-h-screen bg-[#F8F5F0] flex items-center justify-center px-4 py-10">
+  <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center px-4 py-10 transition-all duration-300">
 
-    <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden">
+    <div className="w-full max-w-md bg-white rounded-3xl shadow-sm border border-[#E3DAC9]/60 overflow-hidden">
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-700 to-emerald-600 p-8 text-center">
+      <div className="bg-[#0D2818] p-8 text-center border-b border-[#C5A880]/30 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-20"></div>
 
-        <div className="flex justify-center mb-4">
-          <div className="bg-white p-3 rounded-full shadow-lg">
-            <FaRegUserCircle className="text-5xl text-green-600" />
+        <div className="flex justify-center mb-4 relative z-10">
+          <div className="bg-white/5 p-3 rounded-full border border-[#C5A880]/20">
+            <FaRegUserCircle className="text-4xl text-[#C5A880]" />
           </div>
         </div>
 
-        <h1 className="text-3xl font-bold text-white">
+        <h1 className="text-3xl font-serif-display font-bold text-white relative z-10">
           {register ? "Create Account" : "Welcome Back"}
         </h1>
 
-        <p className="text-green-100 mt-2">
+        <p className="text-[#EAE0D5]/70 mt-2 text-xs uppercase tracking-[1.5px] relative z-10">
           {register
-            ? "Create your bookstore account"
-            : "Login to continue reading"}
+            ? "Join our premium reader circle"
+            : "Sign in to access your vault"}
         </p>
 
       </div>
@@ -109,11 +110,11 @@ function Auth({ register }) {
       {/* Form */}
       <div className="p-8">
 
-        <div className="space-y-4">
+        <div className="space-y-5">
 
           {register && (
             <div>
-              <label className="block text-gray-700 mb-2 font-medium">
+              <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1.5 ml-1">
                 Username
               </label>
 
@@ -124,13 +125,13 @@ function Auth({ register }) {
                 onChange={(e) =>
                   setUser({ ...user, username: e.target.value })
                 }
-                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"
               />
             </div>
           )}
 
           <div>
-            <label className="block text-gray-700 mb-2 font-medium">
+            <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1.5 ml-1">
               Email Address
             </label>
 
@@ -141,12 +142,12 @@ function Auth({ register }) {
               onChange={(e) =>
                 setUser({ ...user, email: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 mb-2 font-medium">
+            <label className="block text-[10px] text-[#C5A880] uppercase tracking-[1.5px] font-semibold mb-1.5 ml-1">
               Password
             </label>
 
@@ -157,13 +158,13 @@ function Auth({ register }) {
               onChange={(e) =>
                 setUser({ ...user, password: e.target.value })
               }
-              className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full p-3.5 bg-[#FAF7F2]/60 border border-[#E3DAC9]/60 focus:bg-white text-sm rounded-xl placeholder-[#0D2818]/45 focus:outline-none focus:border-[#C5A880] focus:ring-1 focus:ring-[#C5A880] transition duration-200"
             />
           </div>
 
           {!register && (
             <div className="text-end">
-              <span className="text-green-600 text-sm cursor-pointer hover:underline">
+              <span className="text-[#C5A880] hover:text-[#0D2818] text-xs font-semibold uppercase tracking-[0.5px] cursor-pointer hover:underline transition duration-200">
                 Forgot Password?
               </span>
             </div>
@@ -171,19 +172,19 @@ function Auth({ register }) {
 
           <button
             onClick={register ? handleRegister : handleLogin}
-            className="w-full bg-gradient-to-r from-green-700 to-emerald-700 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.01] transition-all"
+            className="w-full bg-[#0D2818] text-[#C5A880] hover:bg-[#C5A880] hover:text-[#0D2818] py-3.5 rounded-xl font-semibold text-xs uppercase tracking-[2px] border border-[#C5A880]/20 hover:border-transparent transition-all duration-300 shadow-md"
           >
             {register ? "Create Account" : "Login"}
           </button>
 
           {!register && (
             <>
-              <div className="flex items-center my-5">
-                <div className="flex-1 border-t border-gray-300"></div>
-                <span className="px-3 text-gray-500 text-sm">
-                  OR CONTINUE WITH
+              <div className="flex items-center my-6">
+                <div className="flex-1 border-t border-[#E3DAC9]/60"></div>
+                <span className="px-3 text-[#0D2818]/45 text-[10px] uppercase tracking-[1.5px] font-semibold">
+                  Or Connect With
                 </span>
-                <div className="flex-1 border-t border-gray-300"></div>
+                <div className="flex-1 border-t border-[#E3DAC9]/60"></div>
               </div>
 
               <div className="flex justify-center">
@@ -196,24 +197,24 @@ function Auth({ register }) {
           )}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-8 pt-6 border-t border-[#FAF7F2]">
 
           {register ? (
-            <p className="text-gray-600">
+            <p className="text-sm text-[#0D2818]/70 font-light">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-green-600 font-semibold hover:underline"
+                className="text-[#C5A880] font-semibold uppercase tracking-[0.5px] text-xs hover:text-[#0D2818] transition duration-200"
               >
                 Login
               </Link>
             </p>
           ) : (
-            <p className="text-gray-600">
+            <p className="text-sm text-[#0D2818]/70 font-light">
               New User?{" "}
               <Link
                 to="/register"
-                className="text-green-600 font-semibold hover:underline"
+                className="text-[#C5A880] font-semibold uppercase tracking-[0.5px] text-xs hover:text-[#0D2818] transition duration-200"
               >
                 Register
               </Link>
